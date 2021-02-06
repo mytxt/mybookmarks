@@ -1,0 +1,22 @@
+nopw is a function
+nopw () 
+{ 
+    if [ "$1" = "" ]; then
+        echo "At least one argument required (name of app).";
+        return -1;
+    fi;
+    local app=$1 p=$2;
+    echo "app=$app param=$p";
+    app=$(which $app);
+    if ! [ "$p" = "" ]; then
+        app=$app" $p";
+    fi;
+    [ "$app" = "" ] && return 2;
+    sudo grep "$app" /etc/sudoers &> /dev/null;
+    if [ "$?" = "0" ]; then
+        echo "$app already in sudoers.";
+        return 1;
+    else
+        echo "max ALL=(root) NOPASSWD: $app $p" | xsel -ap;
+    fi
+}

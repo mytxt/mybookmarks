@@ -1,0 +1,19 @@
+Package: *
+Pin: release a=groovy
+Pin-Priority: 1001
+
+Package: *
+Pin: release a=groovy-updates
+Pin-Priority: 1001
+
+Package: *
+Pin: release a=groovy-security
+Pin-Priority: 1001
+
+Package: *
+Pin: release a=groovy-backports
+Pin-Priority: 1001
+
+Package: *
+Pin: release a=groovy-proposed
+Pin-Priority: -1

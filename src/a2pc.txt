@@ -1,0 +1,25 @@
+a2pc is a function
+a2pc () 
+{ 
+    if test "$1" == "-c"; then
+        xsel -cp;
+        shift;
+    fi;
+    [ x"$1" = "x" ] && return 1;
+    [ $(which xsel) ] || sudo apt install xsel -y || return 1;
+    local app=$1 p=$2;
+    echo "1. app=$app p=$p";
+    app=$(which $app) && echo "string to add $app $p";
+    if [ x"$p" != "x" ]; then
+        app="$app $p";
+    fi;
+    echo "2. app=$app";
+    sudo grep "$app" /etc/sudoers &> /dev/null;
+    if [ "$?" = "0" ]; then
+        echo "Already in sudoers.";
+        return 1;
+    else
+        echo "max ALL=(root) NOPASSWD: $app" | xsel -ap;
+        return 0;
+    fi
+}

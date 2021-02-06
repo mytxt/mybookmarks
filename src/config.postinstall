@@ -1,0 +1,19 @@
+if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
+    # sourced
+	echo не помню уже зачем, но я засоусил чтот файл
+	echo конфиг какой-то делал наверное ..;
+
+	# будем трейсить
+	exec 5> >(logger -t $0)
+	BASH_XTRACEFD="5"
+	PS4='$LINENO: '
+	set -x
+
+	return 0
+else
+    # ...
+#	:;
+	echo нахуя ?
+	exit 0
+fi
+
